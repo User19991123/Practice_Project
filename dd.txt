@@ -1,6 +1,8 @@
 
    //Start Excel and open the book
-   XLOpen>filename,1,xlH
+   XLOpen>filename,2,xlH
+   
+   XLOpen>filename,5,x2H
 
    //Ask how many rows we should get
    Input>maxrows,How many rows shall I get?,4
