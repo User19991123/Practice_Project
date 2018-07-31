@@ -1,0 +1,42 @@
+
+   //Start Excel and open the book
+   XLOpen>filename,1,xlH
+
+   //Ask how many rows we should get
+   Input>maxrows,How many rows shall I get?,4
+
+   If>maxrows=0
+     Exit>0
+   Endif
+
+   Let>row=1
+   Repeat>row
+      Let>row=row+1
+      
+      Wait>0.5
+
+      //get the fields for this row
+      XLGetCell>xlH,Sheet1,row,1,field_1
+      XLGetCell>xlH,Sheet1,row,2,field_2
+      XLGetCell>xlH,Sheet1,row,3,field_3
+      /*
+      Trim>field_1,field_1
+      Trim>field_2,field_2
+      Trim>field_3,field_3
+*/
+      GoSub>Register,%field_1%,%field_2%,%field_3%
+
+   Until>row>maxrows
+   
+   CloseWindow>example.xlsx - Excel
+Else
+  MessageModal>Could not find: %filename%
+Endif
+
+SRT>Register
+  IETagEventByAttrib>{"http://examples.sencha.com/extjs/6.6.0/examples/classic/writer/writer-jsonp.html"},INPUT,name=email,,%Register_var_1%
+  IETagEventByAttrib>{"http://examples.sencha.com/extjs/6.6.0/examples/classic/writer/writer-jsonp.html"},INPUT,name=first,,%Register_var_2%
+  IETagEventByAttrib>{"http://examples.sencha.com/extjs/6.6.0/examples/classic/writer/writer-jsonp.html"},INPUT,name=last,,%Register_var_3%
+  Wait>0.5
+  IETagEventByAttrib>{"http://examples.sencha.com/extjs/6.6.0/examples/classic/writer/writer-jsonp.html"},SPAN,innertext=Create,click,
+END>Register
