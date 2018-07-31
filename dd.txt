@@ -13,7 +13,7 @@
 
    Let>row=1
    Repeat>row
-      Let>row=row+1
+      Let>row=row+0
       
       Wait>0.5
 
